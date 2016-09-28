@@ -47,7 +47,7 @@ defmodule Ex03 do
   generates a new list of atoms, where the output list contains `:odd`
   is the corresponding integer is odd, `:even` otherwise.
 
-      iex> Ex03.odd_even [ 1, 2, 4, 7, 9 ]
+      iex> Ex03.odd_even([ 1, 2, 4, 7, 9 ])
       [ :odd, :even, :even, :odd, :odd ]
 
   (The library functions `Integer.is_even` and `Integer.is_odd` may
@@ -55,7 +55,9 @@ defmodule Ex03 do
 
   """
 
-  def odd_even . . . "your code"
+  def odd_even(list) do
+      Enum.map(list, fn(x) -> if Integer.is_even(x) do :even else :odd end end)
+  end 
 
 
   ##############################################################################
@@ -69,15 +71,17 @@ defmodule Ex03 do
       iex> Ex03.list_contains([ 1, 2, 3, 4], 3)
       true
 
-      iex> Ex03.list_contains([ 1, 2, 3, 4], 3)
-      true
+      iex> Ex03.list_contains([ 1, 2, 3, 4], 5)
+      false
 
       iex> Ex03.list_contains([ 1, 2, 3, 4], 3)
       true
 
   """
 
-  def list_contains . .. "your code"
+  def list_contains(list, value) do
+      Enum.any?(list, fn val -> val == value end)
+  end
 
   ##############################################################################
   # 3.3:  5 points #
@@ -92,17 +96,25 @@ defmodule Ex03 do
   a function that checks for the equality of two lists. You don't
   need to consider nested lists.
 
-      iex> Ex03.list_equal [ 1, 2, 3 ], [1, 2, 3]
+      iex> Ex03.list_equal([ 1, 2, 3 ], [1, 2, 3])
       true
-      iex> Ex03.list_equal [ 1, 2, 3 ], [1, 2, 3, 4]
+      iex> Ex03.list_equal([ 1, 2, 3 ], [1, 2, 3, 4])
       false
-      iex> Ex03.list_equal [ 1, 2, 3 ], [3, 2, 1]
+      iex> Ex03.list_equal([ 1, 2, 3 ], [3, 2, 1])
       false
 
+ cond do
+           h + Enum.count(t) == h2 + Enum.count(t2) -> true
+           h == h2 -> list_equal(t,t2)
+       end
   """
 
-  def list_equal . . . "your code"
-
+  def list_equal([], []), do: true
+  def list_equal([h|t], [h2|t2]) do 
+      if h==h2 do list_equal(t, t2) else false end
+  end
+  def list_equal(list1, list2), do: Enum.count(list1) == Enum.count(list2)
+      
 
 
   ##############################################################################
@@ -149,7 +161,7 @@ defmodule Ex03 do
   Think a little about a nice way to lay this code out.
   """
 
-  def won . . . "your code"
+  #def won . . . "your code"
 
 
   ###########################
