@@ -39,7 +39,9 @@ defmodule Ex04 do
       [ 1, 2, 3, 4, 5 ]
 
   """
-  def reverse . . . "your code"
+  def reverse(list) do
+      Ex04.reduce(list, [], &[&1 | &2])
+  end
 
   ##############################################################################
   # 4.2:  5 points #
@@ -47,7 +49,7 @@ defmodule Ex04 do
   @doc """
   Use `reduce` to find the minimum of a list of numbers.
 
-      iex> Ex04.min [ 5, 2, 7, 9 ]
+      iex> Ex04.min([ 5, 2, -7, 9 ])
       2
 
       iex> Ex04.min [ 5, 2, -7, 9 ]
@@ -55,7 +57,9 @@ defmodule Ex04 do
 
   """
 
-  def min . . . "your code"
+  def min(list) do
+      Ex04.reduce(list, [], &(if &1 < &2 do &1 else &2 end))
+  end
 
   ##############################################################################
   # 4.3: 10 points #
@@ -67,7 +71,7 @@ defmodule Ex04 do
   `Integer.is_odd`, and you can use the `reverse` function you defined
   above. Feel free to write helper functions if you want.
 
-      iex> Ex04.even_odd [ 1, 2, 3, 4, 5 ]
+      iex> Ex04.even_odd([ 1, 2, 3, 4, 5 ])
       { [ 2, 4],  [ 1, 3, 5 ] }
 
   Hint: you're taking a list and converting it into something else. What function
@@ -75,7 +79,17 @@ defmodule Ex04 do
   return value will be the thing you have to manipulate.
   """
 
-  def even_odd . . . "your code"
+  def purge_nil(list) do
+     Ex04.reverse(Ex04.reduce(list, [], fn x,y -> if x != nil do [x | y] else y end end))
+  end
+
+  def even_odd(list) do
+      a = Enum.map(list, &(if Integer.is_even(&1) do &1 end))
+
+      b = Enum.map(list, &(if Integer.is_odd(&1) do &1 end))
+
+      {Ex04.purge_nil(a), Ex04.purge_nil(b)}
+  end
 
 
 
